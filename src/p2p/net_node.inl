@@ -811,7 +811,9 @@ namespace nodetool
 
     //only in case if we really sure that we have external visible ip
     m_have_address = true;
+#ifdef ALLOW_DEBUG_COMMANDS
     m_last_stat_request_time = 0;
+#endif
 
     //configure self
 
