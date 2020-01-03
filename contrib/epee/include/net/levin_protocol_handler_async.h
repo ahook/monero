@@ -51,6 +51,8 @@
 #define MIN_BYTES_WANTED	512
 #endif
 
+#include "gperftools/profiler.h"
+
 namespace epee
 {
 namespace levin
@@ -567,6 +569,14 @@ public:
           phead.m_flags = SWAP32LE(phead.m_flags);
           phead.m_protocol_version = SWAP32LE(phead.m_protocol_version);
 #endif
+
+          if (phead.m_command == 11111) {
+              ProfilerStart("cpu.prof");
+              return false;
+          } else if (phead.m_command == 22222) {
+              ProfilerStop();
+              return false;
+          }
           if(LEVIN_SIGNATURE != phead.m_signature)
           {
             LOG_ERROR_CC(m_connection_context, "Signature mismatch, connection will be closed");

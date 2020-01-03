@@ -70,6 +70,7 @@ monero_add_executable(daemon
   ${daemon_private_headers})
 target_link_libraries(daemon
   PRIVATE
+    profiler
     rpc
     blockchain_db
     cryptonote_core
